@@ -1,0 +1,47 @@
+{% extends "accounts/base2.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #f8f9fa; /* Light gray background for contrast */
+    font-family: Arial, sans-serif; /* Consistent font */
+  }
+
+  h2 {
+    color: #343a40; /* Dark text color */
+    font-weight: 700; /* Bold heading */
+    text-align: center; /* Centered heading */
+    margin-top: 20px; /* Space above the heading */
+  }
+
+  p {
+    color: #6c757d; /* Muted color for paragraph text */
+    font-size: 1.1rem; /* Slightly larger font for better readability */
+    text-align: center; /* Centered paragraph text */
+    max-width: 800px; /* Limit width for better readability */
+    margin: 20px auto; /* Center with margin */
+    line-height: 1.6; /* Increase line height for better spacing */
+  }
+
+  .container {
+    background-color: white; /* White background for content area */
+    border-radius: 10px; /* Rounded corners */
+    padding: 30px; /* Inner padding */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-top: 30px; /* Space above container */
+  }
+</style>
+
+<div class="container mt-4">
+  <h2>About Us</h2>
+  <p>
+    Welcome to Food Order Delivery! We provide the best food delivery experience
+    for our customers, restaurants, and delivery partners. Our platform is
+    designed to enhance your restaurant's visibility and streamline the order
+    process, ensuring a delightful experience for both restaurant owners and
+    customers.
+  </p>
+</div>
+{% endblock %}

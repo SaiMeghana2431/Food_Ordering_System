@@ -1,0 +1,46 @@
+{% extends "accounts/base.html" %}
+{% block title %}Food Items{% endblock %}
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #ffb4a2, #e5989b, #b5838d, #ffcdb2);
+    background-size: 400% 400%; /* For smooth gradient animation (optional) */
+    animation: gradientBG 10s ease infinite; /* Optional gradient animation */
+  }
+  
+  /* Optional animation for gradient */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+</style>
+ 
+
+<div class="container mt-4">
+  <h2 class="text-center">Available Restaurants</h2>
+  <br>
+  <div class="row">
+    {% for restaurant in restaurants %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        
+        {% if restaurant.image %}
+          <img src="{{ restaurant.image.url }}" class="card-img-top" alt="{{ restaurant.name }}">
+        {% else %}
+          <img src="{{ MEDIA_URL }}restaurant_images/default_image.jpg" class="card-img-top" alt="Default Image">
+        {% endif %}
+        
+        <div class="card-body">
+          <h5 class="card-title">{{ restaurant.name }}</h5>
+          
+          <!-- Link to explore food items in the restaurant -->
+          <a href="{% url 'customer:menu' restaurant.id %}" class="btn btn-primary">Explore Food Items</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

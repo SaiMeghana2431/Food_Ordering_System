@@ -1,0 +1,19 @@
+{% extends "accounts/base2.html" %}
+{% block title %} Customer Profile {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Customer Profile: {{ customer.name }}</h2>
+  
+  <div>
+    <strong>Name:</strong> {{ customer.name }}<br />
+    <strong>Email:</strong> {{ customer.emailId }}<br />
+    <strong>Pincode :</strong> {{ customer.pincode }}<br />
+    <strong>Address:</strong> {{ customer.street }}, {{ customer.city }} - {{ customer.pincode }}<br />
+    <strong>Description:</strong> {{ customer.description }}<br />
+    <strong>Date Joined:</strong> {{ customer.created }}<br />
+  </div>
+
+  <a href="{% url 'restaurant:orders' restaurant_id=restaurant.id %}" class="btn btn-secondary mt-3">Back to Orders</a>
+</div>
+{% endblock %}

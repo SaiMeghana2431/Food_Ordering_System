@@ -1,0 +1,96 @@
+{% extends "accounts/base.html" %}
+
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center">{{ restaurant.name }} - Menu</h2>
+
+  <div class="row" id="menu-items-container">
+    {% for item in menu_items %}
+    <div class="col-md-4 mb-4 menu-item" data-id="{{ item.id }}">
+      <div class="card h-100">
+        {% if item.image %}
+        <img
+          src="{{ item.image.url }}"
+          class="card-img-top"
+          alt="{{ item.name }}"
+        />
+        {% else %}
+        <img
+          src="{{ MEDIA_URL }}menu_items/default_image.jpg"
+          class="card-img-top"
+          alt="Default Image"
+        />
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text"><strong>Price: </strong>₹{{ item.price }}</p>
+
+          <!-- Counter with -/+ buttons -->
+          <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-outline-secondary decrement" type="button">
+              -
+            </button>
+            <span class="px-3 quantity" data-id="{{ item.id }}">0</span>
+            <button class="btn btn-outline-secondary increment" type="button">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Single Add to Cart Form -->
+  <form action="{% url 'customer:add_to_cart' %}" method="POST" id="add-to-cart-form">
+    {% csrf_token %}
+    <input type="hidden" name="cart_data" id="cart-data" value="" />
+    <button class="btn btn-primary btn-block mt-4" type="submit">
+      Add All to Cart
+    </button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuItems = document.querySelectorAll(".menu-item");
+    const cartDataInput = document.getElementById("cart-data");
+
+    menuItems.forEach(function (item) {
+      const quantityElement = item.querySelector(".quantity");
+      const incrementButton = item.querySelector(".increment");
+      const decrementButton = item.querySelector(".decrement");
+
+      incrementButton.addEventListener("click", function () {
+        let currentQuantity = parseInt(quantityElement.textContent);
+        quantityElement.textContent = currentQuantity + 1;
+      });
+
+      decrementButton.addEventListener("click", function () {
+        let currentQuantity = parseInt(quantityElement.textContent);
+        if (currentQuantity > 0) {
+          quantityElement.textContent = currentQuantity - 1;
+        }
+      });
+    });
+
+    // Collect data when the form is submitted
+    document.getElementById("add-to-cart-form").addEventListener("submit", function (e) {
+      const cartData = [];
+      menuItems.forEach(function (item) {
+        const itemId = item.dataset.id;
+        const quantity = parseInt(item.querySelector(".quantity").textContent);
+        if (quantity > 0) {
+          cartData.push({ item_id: itemId, quantity: quantity });
+        }
+      });
+      cartDataInput.value = JSON.stringify(cartData); // Pass as a JSON string
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "accounts/base.html" %} {% block content %}
+<style>
+  body {
+    background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTd8fHxlbnwwfHx8fHw%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  
+  h2 {
+    font-weight: 700; /* Bold heading */
+    color: #343a40; /* Dark text color for contrast */
+  }
+
+  .card {
+    border-radius: 10px; /* Rounded corners for card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  }
+
+  .card-header {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for contrast */
+    border-radius: 10px 10px 0 0; /* Rounded corners for card header */
+  }
+
+  .lead {
+    font-size: 1.2rem; /* Larger font size for lead paragraph */
+    color: #6c757d; /* Muted color for lead text */
+  }
+
+  .btn-custom {
+    background-color: #28a745; /* Bootstrap success color */
+    color: white; /* White text for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    padding: 10px 20px; /* Padding for buttons */
+    margin-top: 10px; /* Space above buttons */
+  }
+
+  .btn-custom:hover {
+    background-color: #218838; /* Darker green on hover */
+    color: white;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Welcome to the Customer Dashboard, {{ user.name }}</h2>
+      <p class="lead">Your customer-specific content goes here.</p>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Dashboard Overview</h5>
+        </div>
+        <div class="card-body text-center">
+          <p class="card-text">
+            Here you can manage your food orders and explore various options!
+          </p>
+          <a href="{% url 'customer:food_items' %}" class="btn btn-custom"
+            >Explore Food Items</a
+          >
+          <a href="{% url 'customer:cart' %}" class="btn btn-custom"
+            >View Cart</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

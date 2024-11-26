@@ -1,0 +1,50 @@
+{% extends 'accounts/base2.html' %}
+
+
+{% load custom_filters %}
+
+
+{% block title %}Edit Item - {{ item.name
+}}{% endblock %} 
+
+{% block content %}
+<h1 class="text-center my-4">Edit Menu Item: {{ item.name }}</h1>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <form
+        method="POST"
+        enctype="multipart/form-data"
+        class="bg-light p-4 rounded shadow-sm"
+      >
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label for="id_name">Item Name</label>
+          {{ form.name|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_description">Description</label>
+          {{ form.description|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_price">Price</label>
+          {{ form.price|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_image">Image</label>
+          {{ form.image|add_class:"form-control-file" }}
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-3">
+          Update Item
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

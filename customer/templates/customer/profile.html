@@ -1,0 +1,26 @@
+{% extends "accounts/base.html" %} {% block title %}Your Profile{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">{{ user.name }}'s Profile</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Email:</strong> {{ user.emailId }}</p>
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Address:</strong> {{ user.street }}</p>
+      <p><strong>City:</strong> {{ user.city }}</p>
+      <p><strong>Pincode:</strong> {{ user.pincode }}</p>
+      <p><strong>Description:</strong> {{ user.description }}</p>
+      <p>
+        <strong>Account Created:</strong> {{ user.created|date:"Y-m-d H:i" }}
+      </p>
+
+      <!-- Edit Button -->
+      <a href="{% url 'customer:edit_profile' %}" class="btn btn-primary mt-3"
+        >Edit Profile</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

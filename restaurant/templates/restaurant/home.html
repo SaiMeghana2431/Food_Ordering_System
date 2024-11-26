@@ -1,0 +1,75 @@
+{% extends "accounts/base2.html" %} {% block content %}
+<style>
+  body {
+    background-image: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2EwMDkta2Fib29tcGljcy0wMDEuanBn.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  h2 {
+    font-weight: 700; /* Bold heading for emphasis */
+    color: #343a40; /* Dark text color */
+  }
+
+  .card {
+    border-radius: 10px; /* Rounded corners for card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  }
+
+  .card-header {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white; /* White text for contrast */
+    border-radius: 10px 10px 0 0; /* Rounded corners for card header */
+  }
+
+  .lead {
+    font-size: 1.2rem; /* Larger font size for lead paragraph */
+    color: #6c757d; /* Muted color for lead text */
+  }
+
+  .btn-custom {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    padding: 10px 20px; /* Padding for buttons */
+    margin-top: 10px; /* Space above buttons */
+  }
+
+  .btn-custom:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: white;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Welcome to the Restaurant Dashboard, {{ user.name }}</h2>
+      <p class="lead">Manage your restaurant operations effectively!</p>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Dashboard Overview</h5>
+        </div>
+        <div class="card-body text-center">
+          <p class="card-text">Easily manage your menu and orders!</p>
+          <a
+            href="{% url 'restaurant:restaurant_menu' restaurant_id=restaurant_id %}"
+            class="btn btn-custom"
+            >Manage Menu</a
+          >
+          <a
+            href="{% url 'restaurant:orders' restaurant_id=restaurant_id  %}"
+            class="btn btn-custom"
+            >View Orders</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

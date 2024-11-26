@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Select Role</title>
+    <style>
+      body {
+        background: linear-gradient(
+          135deg,
+          #73a5ff,
+          #5477f5
+        ); /* Gradient background */
+        margin: 0;
+        padding: 0;
+        height: 100vh; /* Full height of the viewport */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: Arial, sans-serif; /* Added font family for better text rendering */
+      }
+
+      .container {
+        max-width: 400px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #5cb85c;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        width: 100%; /* Make the button full-width */
+      }
+
+      button:hover {
+        background-color: #4cae4c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Select Your Role</h1>
+      <form action="{% url 'accounts:redirect_login' %}" method="GET">
+        <select name="role" required>
+          <option value="customer">Customer</option>
+          <option value="delivery">Delivery</option>
+          <option value="restaurant">Restaurant</option>
+        </select>
+        <button type="submit">Proceed to Login</button>
+      </form>
+    </div>
+  </body>
+</html>

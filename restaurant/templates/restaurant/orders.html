@@ -1,0 +1,62 @@
+{% extends "accounts/base2.html" %} {% block title %} Orders {% endblock %} 
+
+
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Welcome to the Orders Page for {{ restaurant.name }}!</h2>
+
+  <h3>Orders:</h3>
+  {% if orders %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Item(s)</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Cost</th>
+        <th scope="col">Date Placed</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+          <a
+            href="{% url 'restaurant:customer_profile' restaurant_id=restaurant.id customer_id=order.customer.id %}"
+          >
+            {{ order.customer.name }}
+          </a>
+        </td>
+        <td>
+          {% for item in order.ordered_items %} {{ item.item_name }}<br />
+          {% endfor %}
+        </td>
+        <td>
+          {% for item in order.ordered_items %} {{ item.quantity }}<br />
+          {% endfor %}
+        </td>
+        <td>₹{{ order.total_cost }}</td>
+        <td>{{ order.ordered_at }}</td>
+        <td>
+          {% if order.status != 'Cooking Done' and order.status != 'Delivered' %}
+          <form action="{% url 'restaurant:mark_order_done' order.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success">Mark as Done</button>
+          </form>
+          {% else %}
+          <span>{{ order.status }}</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No orders yet for this restaurant.</p>
+  {% endif %}
+</div>
+{% endblock %}

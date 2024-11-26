@@ -1,0 +1,27 @@
+{% extends "accounts/base2.html" %}
+
+
+{% block title %}Restaurant Profile{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">{{ restaurant.name }}'s Profile</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Email:</strong> {{ restaurant.emailId }}</p>
+      <p><strong>Name:</strong> {{ restaurant.name }}</p>
+      <p><strong>Address:</strong> {{ restaurant.street }}</p>
+      <p><strong>City:</strong> {{ restaurant.city }}</p>
+      <p><strong>Pincode:</strong> {{ restaurant.pincode }}</p>
+      <p><strong>Description:</strong> {{ restaurant.description }}</p>
+      <p><strong>Account Created:</strong> {{ restaurant.created|date:"Y-m-d H:i" }}</p>
+
+      <!-- Edit Button -->
+      <a href="{% url 'restaurant:profile_edit' restaurant.id %}" class="btn btn-primary mt-3">Edit Profile</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

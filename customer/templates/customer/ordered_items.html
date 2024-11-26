@@ -1,0 +1,45 @@
+{% extends "accounts/base.html" %} {% block title %}Orders{% endblock %} 
+
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Your Orders</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Order No</th>
+        <th scope="col">Restaurant</th>
+        <th scope="col">Item(s)</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Cost</th>
+        <th scope="col">Date Placed</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in order_data %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ data.restaurant.name }}</td>
+        <td>
+          {% for item in data.order.ordered_items %} {{ item.item_name }}<br />
+          {% endfor %}
+        </td>
+        <td>
+          {% for item in data.order.ordered_items %} {{ item.quantity }}<br />
+          {% endfor %}
+        </td>
+        <td>₹{{ data.order.total_cost }}</td>
+        <td>{{ data.order.ordered_at }}</td>
+        <td>{{ data.order.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if not order_data %}
+  <p>You have not placed any orders yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

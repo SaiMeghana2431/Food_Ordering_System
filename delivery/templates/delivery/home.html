@@ -1,0 +1,72 @@
+{% extends "accounts/base1.html" %} {% block content %}
+<style>
+  body {
+    background-image: url('https://cdni.iconscout.com/illustration/premium/thumb/food-delivery-boy-illustration-download-in-svg-png-gif-file-formats--on-scooter-home-location-online-pack-e-commerce-shopping-illustrations-3351728.png?f=webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  h2 {
+    font-weight: 700; /* Bold heading */
+    color: #343a40; /* Dark text color */
+  }
+
+  .card {
+    border-radius: 10px; /* Rounded corners for card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  }
+
+  .card-header {
+    background-color: #28a745; /* Bootstrap primary color */
+    color: white; /* White text for contrast */
+    border-radius: 10px 10px 0 0; /* Rounded corners for card header */
+  }
+
+  .lead {
+    font-size: 1.2rem; /* Larger font size for lead paragraph */
+    color: #6c757d; /* Muted color for lead text */
+  }
+
+  .btn-custom {
+    background-color: #dd7616; /* Green button color */
+    color: white; /* White text for buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    padding: 10px 20px; /* Padding for buttons */
+    margin-top: 10px; /* Space above buttons */
+  }
+
+  .btn-custom:hover {
+    background-color: #ad6420; /* Darker green on hover */
+    color: white;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Welcome to the Delivery Dashboard, {{ user.name }}</h2>
+      <p class="lead">Manage your delivery tasks efficiently!</p>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Dashboard Overview</h5>
+        </div>
+        <div class="card-body text-center">
+          <p class="card-text">
+            Check your delivery assignments and update statuses easily!
+          </p>
+          <a href="{% url 'delivery:to_be_delivered' %}" class="btn btn-custom"
+            >To Be Delivered</a
+          >
+          <a href="{% url 'delivery:delivered' %}" class="btn btn-custom"
+            >Completed Deliveries</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
