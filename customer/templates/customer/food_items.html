@@ -1,42 +1,82 @@
-{% extends "accounts/base.html" %}
-{% block title %}Food Items{% endblock %}
-{% block content %}
+{% extends "accounts/base.html" %} {% block title %}Food Items{% endblock %} {% block content %}
 <style>
   body {
     background: linear-gradient(135deg, #ffb4a2, #e5989b, #b5838d, #ffcdb2);
     background-size: 400% 400%; /* For smooth gradient animation (optional) */
     animation: gradientBG 10s ease infinite; /* Optional gradient animation */
   }
-  
+
   /* Optional animation for gradient */
   @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
-  
+
+  .card {
+    border-radius: 10px; /* Increased border radius for a smoother look */
+    overflow: hidden; /* Ensures the image and content fit within the rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Optional shadow for better visual hierarchy */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  }
+
+  .card:hover {
+    transform: translateY(-10px); /* Slight hover lift effect */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  }
+
+  .card-img-top {
+    border-top-left-radius: 10px; /* Ensure image corners match card's border radius */
+    border-top-right-radius: 10px;
+  }
+
+  .btn-primary {
+    background-color: #b5838d;
+    border: none;
+    transition: background 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #64577a;
+  }
 </style>
- 
 
 <div class="container mt-4">
   <h2 class="text-center">Available Restaurants</h2>
-  <br>
+  <br />
   <div class="row">
     {% for restaurant in restaurants %}
     <div class="col-md-4 mb-4">
       <div class="card h-100">
-        
         {% if restaurant.image %}
-          <img src="{{ restaurant.image.url }}" class="card-img-top" alt="{{ restaurant.name }}">
+        <img
+          src="{{ restaurant.image.url }}"
+          class="card-img-top"
+          alt="{{ restaurant.name }}"
+        />
         {% else %}
-          <img src="{{ MEDIA_URL }}restaurant_images/default_image.jpg" class="card-img-top" alt="Default Image">
+        <img
+          src="{{ MEDIA_URL }}restaurant_images/default_image.jpg"
+          class="card-img-top"
+          alt="Default Image"
+        />
         {% endif %}
-        
+
         <div class="card-body">
           <h5 class="card-title">{{ restaurant.name }}</h5>
-          
+
           <!-- Link to explore food items in the restaurant -->
-          <a href="{% url 'customer:menu' restaurant.id %}" class="btn btn-primary">Explore Food Items</a>
+          <a
+            href="{% url 'customer:menu' restaurant.id %}"
+            class="btn btn-primary"
+            >Explore Food Items</a
+          >
         </div>
       </div>
     </div>

@@ -4,65 +4,133 @@
     <meta charset="UTF-8" />
     <title>Select Role</title>
     <style>
+      /* Global Styles */
       body {
-        background: linear-gradient(
-          135deg,
-          #73a5ff,
-          #5477f5
-        ); /* Gradient background */
         margin: 0;
         padding: 0;
-        height: 100vh; /* Full height of the viewport */
+        height: 100vh;
         display: flex;
-        align-items: center;
         justify-content: center;
-        text-align: center;
-        font-family: Arial, sans-serif; /* Added font family for better text rendering */
+        align-items: center;
+        background: linear-gradient(
+          135deg,
+          #ff7a18,
+          #af002d 40%,
+          #320d4b
+        ); /* Gradient background */
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
 
       .container {
-        max-width: 400px;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
+        max-width: 500px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        transform: scale(0.95);
+        animation: scaleUp 0.4s ease-out forwards;
+        transition: transform 0.3s ease;
       }
 
+      /* Title */
       h1 {
-        color: #333;
-        margin-bottom: 20px;
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        color: #ff7a18;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
 
+      /* Welcome Heading */
+      .welcome-heading {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        color: #fff;
+        font-weight: 600;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1.5px;
+      }
+
+      /* Select Box Styling */
       select {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
         width: 100%;
-        font-size: 16px;
+        padding: 12px;
+        border: 2px solid #ff7a18;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        transition: border-color 0.3s ease;
       }
 
+      select:focus {
+        border-color: #320d4b;
+        outline: none;
+      }
+
+      /* Button Styling */
       button {
-        background-color: #5cb85c;
-        color: white;
+        width: 100%;
+        padding: 15px;
         border: none;
-        padding: 10px;
-        border-radius: 4px;
+        background-color: #ff7a18;
+        color: white;
+        font-size: 1.1rem;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-        width: 100%; /* Make the button full-width */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 10px;
       }
 
       button:hover {
-        background-color: #4cae4c;
+        background-color: #320d4b;
+        transform: translateY(-5px);
+      }
+
+      button:active {
+        transform: translateY(2px);
+      }
+
+      /* Animation Effects */
+      @keyframes scaleUp {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+        select {
+          font-size: 1rem;
+        }
+        button {
+          font-size: 1rem;
+        }
       }
     </style>
   </head>
+
   <body>
+    <div class="welcome-heading">
+      Welcome to the Online Food Ordering System!
+    </div>
     <div class="container">
-      <h1>Select Your Role</h1>
+      <h1>Choose Your Role</h1>
       <form action="{% url 'accounts:redirect_login' %}" method="GET">
         <select name="role" required>
           <option value="customer">Customer</option>

@@ -1,16 +1,87 @@
-{% extends "accounts/base.html" %}
+{% extends "accounts/base.html" %} {% block title %}Menu{% endblock %} {% block content %}
 
 
-{% block title %}Menu{% endblock %}
+<style>
+  body {
+    background: linear-gradient(135deg, #d4a5a5, #f5b0cb, #f8d2e3, #ffc8dd);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+  }
 
-{% block content %}
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 400px; /* Reduced height */
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 200px; /* Adjusted image height to fit card */
+    object-fit: cover;
+  }
+
+  .card-body {
+    overflow: hidden;
+  }
+
+  .btn-outline-secondary {
+    border-color: #f78fb3;
+    color: #f78fb3;
+    border-width: 2px;
+    font-weight: bold;
+    padding: 8px 20px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: #f78fb3;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  .btn-primary {
+    background-color: #ff758f;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #d45d6a;
+    transform: scale(1.05);
+  }
+</style>
+
 <div class="container mt-4">
   <h2 class="text-center">{{ restaurant.name }} - Menu</h2>
 
   <div class="row" id="menu-items-container">
     {% for item in menu_items %}
     <div class="col-md-4 mb-4 menu-item" data-id="{{ item.id }}">
-      <div class="card h-100">
+      <div class="card">
         {% if item.image %}
         <img
           src="{{ item.image.url }}"
@@ -27,11 +98,11 @@
 
         <div class="card-body">
           <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text text-truncate">{{ item.description }}</p>
           <p class="card-text"><strong>Price: </strong>₹{{ item.price }}</p>
 
           <!-- Counter with -/+ buttons -->
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center mt-3">
             <button class="btn btn-outline-secondary decrement" type="button">
               -
             </button>
@@ -47,7 +118,11 @@
   </div>
 
   <!-- Single Add to Cart Form -->
-  <form action="{% url 'customer:add_to_cart' %}" method="POST" id="add-to-cart-form">
+  <form
+    action="{% url 'customer:add_to_cart' %}"
+    method="POST"
+    id="add-to-cart-form"
+  >
     {% csrf_token %}
     <input type="hidden" name="cart_data" id="cart-data" value="" />
     <button class="btn btn-primary btn-block mt-4" type="submit">
@@ -80,17 +155,21 @@
     });
 
     // Collect data when the form is submitted
-    document.getElementById("add-to-cart-form").addEventListener("submit", function (e) {
-      const cartData = [];
-      menuItems.forEach(function (item) {
-        const itemId = item.dataset.id;
-        const quantity = parseInt(item.querySelector(".quantity").textContent);
-        if (quantity > 0) {
-          cartData.push({ item_id: itemId, quantity: quantity });
-        }
+    document
+      .getElementById("add-to-cart-form")
+      .addEventListener("submit", function (e) {
+        const cartData = [];
+        menuItems.forEach(function (item) {
+          const itemId = item.dataset.id;
+          const quantity = parseInt(
+            item.querySelector(".quantity").textContent
+          );
+          if (quantity > 0) {
+            cartData.push({ item_id: itemId, quantity: quantity });
+          }
+        });
+        cartDataInput.value = JSON.stringify(cartData); // Pass as a JSON string
       });
-      cartDataInput.value = JSON.stringify(cartData); // Pass as a JSON string
-    });
   });
 </script>
 {% endblock %}

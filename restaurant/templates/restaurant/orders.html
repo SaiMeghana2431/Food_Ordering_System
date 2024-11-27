@@ -3,6 +3,97 @@
 
 
 {% block content %}
+<style>
+  body {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Beautiful gradient from pink to orange */
+    font-family: Arial, sans-serif; /* Consistent font */
+    min-height: 100vh; /* Ensure the body covers full viewport height */
+    color: #333; /* Default text color */
+  }
+
+  .container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for content */
+    border-radius: 10px; /* Rounded corners */
+    padding: 30px; /* Inner padding */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 30px; /* Space above container */
+    max-width: 1200px; /* Restrict the width */
+    margin-left: auto; 
+    margin-right: auto; /* Center the container */
+  }
+
+  h2 {
+    color: #333; /* Dark color for heading */
+    font-size: 2rem; /* Large heading */
+    font-weight: 700; /* Bold heading */
+    text-align: center; /* Centered heading */
+    margin-bottom: 20px; /* Space below */
+  }
+
+  h3 {
+    color: #444; /* Darker color for subheading */
+    font-size: 1.5rem; /* Medium subheading */
+    font-weight: 600; /* Semi-bold subheading */
+    margin-bottom: 20px; /* Space below */
+  }
+
+  table {
+    width: 100%; /* Make the table full width */
+    border-collapse: collapse; /* Remove double borders */
+  }
+
+  th, td {
+    padding: 12px 15px; /* Space inside cells */
+    text-align: center; /* Center text */
+    border: 1px solid #ddd; /* Light border for table */
+    font-size: 1rem; /* Text size for cells */
+  }
+
+  th {
+    background-color: #343a40; /* Dark header background */
+    color: white; /* White text for headers */
+    font-weight: bold; /* Bold headers */
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray rows for readability */
+  }
+
+  tr:hover {
+    background-color: #ddd; /* Highlight row on hover */
+    cursor: pointer; /* Show pointer cursor */
+  }
+
+  .btn {
+    background-color: #28a745; /* Green button */
+    color: white; /* White text */
+    border-radius: 5px; /* Rounded corners for buttons */
+    padding: 10px 20px; /* Button padding */
+    font-size: 1rem; /* Font size */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+
+  .btn:hover {
+    background-color: #218838; /* Darker green on hover */
+  }
+
+  .btn-danger {
+    background-color: #dc3545; /* Red button for cancel or delete */
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333; /* Darker red on hover */
+  }
+
+  .no-orders {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+  }
+</style>
 <div class="container mt-4">
   <h2>Welcome to the Orders Page for {{ restaurant.name }}!</h2>
 

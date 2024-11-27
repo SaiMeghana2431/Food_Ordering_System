@@ -1,12 +1,16 @@
-{% extends "accounts/base2.html" %}
+{% extends "accounts/base2.html" %} {% block title %}About Us{% endblock %} 
 
-{% block title %}About Us{% endblock %}
 
 {% block content %}
+
 <style>
   body {
-    background-color: #f8f9fa; /* Light gray background for contrast */
+    background-image: url("https://img.freepik.com/free-photo/top-view-frame-with-food-copy-space_23-2148247893.jpg?semt=ais_hybrid"); /* Add your background image URL here */
+    background-size: cover; /* Ensure the background image covers the entire page */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image repetition */
     font-family: Arial, sans-serif; /* Consistent font */
+    min-height: 100vh; /* Make sure the body takes up the full viewport height */
   }
 
   h2 {
@@ -26,7 +30,12 @@
   }
 
   .container {
-    background-color: white; /* White background for content area */
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ); /* Semi-transparent white background for content */
     border-radius: 10px; /* Rounded corners */
     padding: 30px; /* Inner padding */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */

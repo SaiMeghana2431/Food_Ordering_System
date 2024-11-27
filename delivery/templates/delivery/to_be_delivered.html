@@ -1,8 +1,120 @@
-{% extends "accounts/base1.html" %} 
+{% extends "accounts/base1.html" %} {% block content %}
+<style>
+  /* Overall background with a linear gradient */
+  html,
+  body {
+    background: linear-gradient(
+      135deg,
+      #6e7bff,
+      #96b8ff
+    ); /* Gradient from blue to light blue */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
 
+  /* Container styling */
+  .container {
+    background-color: #faf1f1; /* White background for the container */
+    padding: 30px; /* Inner padding for the container */
+    border-radius: 12px; /* Rounded corners for a modern feel */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-top: 30px; /* Space from the top */
+    max-width: 1200px; /* Limit the container width */
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-{% block content %}
+  /* Heading Style */
+  h2 {
+    text-align: center;
+    color: #2c3e50; /* Dark color for the heading */
+    font-size: 2rem; /* Slightly larger font size */
+    margin-bottom: 20px; /* Space below the heading */
+  }
 
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures no space between table cells */
+  }
+
+  th,
+  td {
+    text-align: center;
+    padding: 12px; /* Inner padding for cells */
+    font-size: 1rem;
+  }
+
+  th {
+    background-color: #34495e; /* Dark background for the header */
+    color: #fff; /* White text in the header */
+    font-weight: bold; /* Bold text in the header */
+  }
+
+  td {
+    background-color: #ecf0f1; /* Light background for data rows */
+    color: #34495e; /* Dark text for data */
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f5f6fa; /* Slightly darker background for even rows */
+  }
+
+  tr:hover td {
+    background-color: #dfe6e9; /* Slightly darker on hover */
+    cursor: pointer; /* Changes cursor to pointer */
+  }
+
+  /* Button Styles */
+  .btn {
+    border-radius: 8px; /* Rounded corners for buttons */
+    padding: 8px 20px; /* Adequate padding for buttons */
+    font-size: 1rem; /* Consistent font size */
+  }
+
+  .btn-success {
+    background-color: #27ae60; /* Green for "Mark as Delivered" */
+    color: #fff;
+    border: none;
+  }
+
+  .btn-success:hover {
+    background-color: #2ecc71; /* Lighter green on hover */
+  }
+
+  .btn-secondary {
+    background-color: #95a5a6; /* Grey for disabled button */
+    color: #fff;
+    border: none;
+  }
+
+  .btn-secondary:disabled {
+    background-color: #bdc3c7; /* Lighter grey for disabled button */
+  }
+
+  .btn:hover {
+    opacity: 0.9; /* Slightly transparent on hover */
+  }
+
+  /* Empty state */
+  .text-center {
+    color: #7f8c8d; /* Muted text color for empty state */
+    font-size: 1.1rem; /* Slightly larger font for better readability */
+  }
+
+  /* Custom styling for ordered items list */
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  li {
+    font-size: 0.9rem; /* Smaller font for ordered items */
+    color: #2c3e50;
+  }
+</style>
 
 <div class="container mt-4">
   <h2>Pending Deliveries</h2>
@@ -11,6 +123,7 @@
       <tr>
         <th>Order ID</th>
         <th>Customer</th>
+        <th>Address</th>
         <th>Restaurant</th>
         <th>Items</th>
         <th>Total Cost</th>
@@ -20,9 +133,11 @@
     </thead>
     <tbody>
       {% for order in orders %}
+      <h1>{{ order.customer.address }}</h1>
       <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ order.customer.name }}</td>
+        <td>{{ order.customer.street }}</td>
         <td>{{ order.restaurant.name }}</td>
         <td>
           <ul>
@@ -49,7 +164,7 @@
       </tr>
       {% empty %}
       <tr>
-        <td colspan="6" class="text-center">No pending orders</td>
+        <td colspan="7" class="text-center">No pending orders</td>
       </tr>
       {% endfor %}
     </tbody>

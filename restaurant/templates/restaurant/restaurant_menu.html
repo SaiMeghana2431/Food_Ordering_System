@@ -1,4 +1,102 @@
 {% extends 'accounts/base2.html' %} {% block title %} Menu {% endblock %} {% block content %}
+
+<style>
+  /* Custom styles for the table */ /* Amazing linear gradient background for the page */
+  body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #333;
+  }
+
+  /* Styling for the header */
+  h1,
+  h3 {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #4a4a4a;
+  }
+
+  /* Modal custom styling */
+  .modal-content {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-header {
+    background: #ff9a9e;
+    color: white;
+  }
+
+  .modal-body {
+    padding: 30px;
+  }
+
+  /* Table Custom Styling */
+  .table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  /* Action Buttons Styling */
+  .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-warning {
+    background-color: #f9a825;
+    border: none;
+  }
+
+  .btn-warning:hover {
+    background-color: #f57f17;
+  }
+
+  .btn-danger {
+    background-color: #d32f2f;
+    border: none;
+  }
+
+  .btn-danger:hover {
+    background-color: #c62828;
+  }
+
+  /* Hover Effect for Table Rows */
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  /* Gradient animation */
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+</style>
 <h1 class="text-center my-4">Menu for {{ restaurant.name }}</h1>
 
 <!-- Button to trigger modal -->
@@ -91,9 +189,19 @@
             >Edit</a
           >
 
-          <form method="POST" action="{% url 'restaurant:delete_item' item.id %}" style="display:inline;">
+          <form
+            method="POST"
+            action="{% url 'restaurant:delete_item' item.id %}"
+            style="display: inline"
+          >
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+            <button
+              type="submit"
+              class="btn btn-danger btn-sm"
+              onclick="return confirm('Are you sure you want to delete this item?')"
+            >
+              Delete
+            </button>
           </form>
         </td>
       </tr>
@@ -106,31 +214,4 @@
   </table>
 </div>
 
-{% endblock %} {% block style %}
-<style>
-  /* Custom styles for the table */
-  .table {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .table th,
-  .table td {
-    text-align: center;
-    vertical-align: middle;
-  }
-
-  /* Styling for the small image */
-  .table img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-  }
-
-  /* Custom styling for the Action buttons */
-  .btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-  }
-</style>
 {% endblock %}

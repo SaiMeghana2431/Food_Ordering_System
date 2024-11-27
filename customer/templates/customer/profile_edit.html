@@ -1,35 +1,135 @@
-{% extends "accounts/base.html" %}
-
-{% block title %}Edit Profile{% endblock %}
-
+{% extends "accounts/base.html" %} {% block title %}Edit Profile{% endblock %}
 {% block content %}
+<style>
+  body {
+    background: linear-gradient(
+      120deg,
+      #84fab0,
+      #8fd3f4
+    ); /* Gradient background from green to light blue */
+    background-size: cover;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ); /* Slight transparency for the form background */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow around the form */
+    max-width: 600px;
+    margin: 40px auto;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .form-label {
+    font-weight: 500;
+    color: #555;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+  }
+
+  .form-control:focus {
+    border-color: #3ac569;
+    box-shadow: 0 0 8px rgba(58, 197, 105, 0.3); /* Highlight focus */
+  }
+
+  .btn-success {
+    width: 100%;
+    background: #3ac569; /* Green button background */
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    transition: background 0.3s ease; /* Smooth transition for hover effect */
+  }
+
+  .btn-success:hover {
+    background: #2ea856; /* Darker shade on hover */
+  }
+
+  .mb-3 {
+    margin-bottom: 20px;
+  }
+
+  textarea.form-control {
+    resize: vertical; /* Allows vertical resizing of textarea */
+  }
+</style>
+
 <div class="container mt-4">
   <h2>Edit Profile</h2>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        value="{{ user.name }}"
+      />
     </div>
     <div class="mb-3">
       <label for="emailId" class="form-label">Email</label>
-      <input type="email" class="form-control" id="emailId" name="emailId" value="{{ user.emailId }}" readonly>
+      <input
+        type="email"
+        class="form-control"
+        id="emailId"
+        name="emailId"
+        value="{{ user.emailId }}"
+        readonly
+      />
     </div>
     <div class="mb-3">
       <label for="street" class="form-label">Address</label>
-      <textarea class="form-control" id="street" name="street">{{ user.street }}</textarea>
+      <textarea class="form-control" id="street" name="street">
+{{ user.street }}</textarea
+      >
     </div>
     <div class="mb-3">
       <label for="city" class="form-label">City</label>
-      <input type="text" class="form-control" id="city" name="city" value="{{ user.city }}">
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        name="city"
+        value="{{ user.city }}"
+      />
     </div>
     <div class="mb-3">
       <label for="pincode" class="form-label">Pincode</label>
-      <input type="text" class="form-control" id="pincode" name="pincode" value="{{ user.pincode }}">
+      <input
+        type="text"
+        class="form-control"
+        id="pincode"
+        name="pincode"
+        value="{{ user.pincode }}"
+      />
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <textarea class="form-control" id="description" name="description">{{ user.description }}</textarea>
+      <textarea class="form-control" id="description" name="description">
+{{ user.description }}</textarea
+      >
     </div>
     <button type="submit" class="btn btn-success">Save Changes</button>
   </form>

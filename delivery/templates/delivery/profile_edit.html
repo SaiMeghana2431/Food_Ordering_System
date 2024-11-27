@@ -1,26 +1,123 @@
-{% extends "accounts/base1.html" %}
+{% extends "accounts/base1.html" %} {% block content %}
+<style>
+  body {
+    background: linear-gradient(
+      135deg,
+      #d4c1f1,
+      #f1e2d2,
+      #ff9a9e
+    ); /* Soft gradient background */
+    background-size: cover;
+    min-height: 100vh;
+    font-family: "Arial", sans-serif;
+  }
 
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
 
-{% block content %}
+  h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
 
+  .form-container {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ); /* Slightly transparent white background */
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+  }
+
+  .form-label {
+    font-size: 16px;
+    color: #34495e;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .form-control:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+  }
+
+  .btn-success {
+    background-color: #6c63ff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+  }
+
+  .btn-success:hover {
+    background-color: #5148d8; /* Darker shade on hover */
+  }
+
+  .mb-3 {
+    margin-bottom: 20px;
+  }
+</style>
 
 <div class="container mt-4">
+  <div class="form-container">
     <h2>Edit Profile</h2>
     <form method="POST">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ user.name }}">
-        </div>
-        <div class="mb-3">
-            <label for="emailId" class="form-label">Email</label>
-            <input type="email" class="form-control" id="emailId" name="emailId" value="{{ user.emailId }}" disabled>
-        </div>
-        <div class="mb-3">
-            <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control" id="city" name="city" value="{{ user.city }}">
-        </div>
-        <button type="submit" class="btn btn-success">Save Changes</button>
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          value="{{ user.name }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="emailId" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="emailId"
+          name="emailId"
+          value="{{ user.emailId }}"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          value="{{ user.city }}"
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Save Changes</button>
     </form>
+  </div>
 </div>
+
 {% endblock %}

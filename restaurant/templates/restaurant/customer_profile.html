@@ -1,19 +1,109 @@
-{% extends "accounts/base2.html" %}
-{% block title %} Customer Profile {% endblock %}
+{% extends "accounts/base2.html" %} {% block title %}Customer Profile{% endblock %} {% block content %}
+<style>
+  /* Background Gradient */
+  body {
+    background: linear-gradient(
+      120deg,
+      #ff6a00,
+      #ee0979
+    ); /* Vivid orange to pink gradient */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+  }
 
-{% block content %}
+  /* Profile Container Styling */
+  .container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Heading Styling */
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6a00;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* Profile Info Styling */
+  .profile-info {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 25px;
+  }
+
+  .profile-info strong {
+    color: #ff6a00;
+    font-weight: bold;
+  }
+
+  .profile-info br {
+    margin-bottom: 10px;
+  }
+
+  /* Button Styling */
+  .btn-secondary {
+    background-color: #ff6a00;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    background-color: #ee0979;
+    transform: translateY(-5px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    .container {
+      padding: 25px;
+    }
+
+    .btn-secondary {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+  }
+</style>
+
 <div class="container mt-4">
   <h2>Customer Profile: {{ customer.name }}</h2>
-  
-  <div>
+
+  <div class="profile-info">
     <strong>Name:</strong> {{ customer.name }}<br />
     <strong>Email:</strong> {{ customer.emailId }}<br />
-    <strong>Pincode :</strong> {{ customer.pincode }}<br />
-    <strong>Address:</strong> {{ customer.street }}, {{ customer.city }} - {{ customer.pincode }}<br />
+    <strong>Pincode:</strong> {{ customer.pincode }}<br />
+    <strong>Address:</strong> {{ customer.street }}, {{ customer.city }}<br />
     <strong>Description:</strong> {{ customer.description }}<br />
     <strong>Date Joined:</strong> {{ customer.created }}<br />
   </div>
 
-  <a href="{% url 'restaurant:orders' restaurant_id=restaurant.id %}" class="btn btn-secondary mt-3">Back to Orders</a>
+  <a
+    href="{% url 'restaurant:orders' restaurant_id=restaurant.id %}"
+    class="btn btn-secondary mt-3"
+    >Back to Orders</a
+  >
 </div>
 {% endblock %}

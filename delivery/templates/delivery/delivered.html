@@ -1,44 +1,158 @@
-{% extends "accounts/base1.html" %}
+{% extends "accounts/base1.html" %} {% block content %}
 
+<style>
+  /* Overall background with a gradient */
+  body {
+    background: linear-gradient(
+      135deg,
+      #e8eef1, #43b0f1, #057dcd, #1e3d58
+    ); /* Gradient from orange to yellow to red */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
 
-{% block content %}
+  /* Container styling */
+  .container {
+    background-color: #ffffff; /* White background for the container */
+    padding: 30px; /* Inner padding for the container */
+    border-radius: 12px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-top: 30px; /* Space from the top */
+    max-width: 1200px; /* Limiting the container width */
+    margin-left: auto;
+    margin-right: auto;
+  }
 
+  /* Heading Style */
+  h2 {
+    text-align: center;
+    color: #2c3e50; /* Dark color for the heading */
+    font-size: 2rem; /* Larger font size */
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures no space between cells */
+  }
+
+  th,
+  td {
+    text-align: center;
+    padding: 12px; /* Adequate padding for cells */
+    font-size: 1rem;
+  }
+
+  th {
+    background-color: #34495e; /* Dark background for the header */
+    color: #fff; /* White text in the header */
+    font-weight: bold;
+  }
+
+  td {
+    background-color: #ecf0f1; /* Light background for data rows */
+    color: #34495e; /* Dark text color */
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f5f6fa; /* Slightly darker background for even rows */
+  }
+
+  tr:hover td {
+    background-color: #dfe6e9; /* Slightly darker background on hover */
+    cursor: pointer; /* Changes cursor to pointer */
+  }
+
+  /* Empty state */
+  .text-center {
+    color: #7f8c8d; /* Muted text color for empty state */
+    font-size: 1.1rem; /* Slightly larger font for better readability */
+  }
+
+  /* Button Styles */
+  .btn {
+    border-radius: 8px; /* Rounded corners for buttons */
+    padding: 8px 20px; /* Adequate padding */
+    font-size: 1rem; /* Consistent font size */
+  }
+
+  /* Custom button colors */
+  .btn-success {
+    background-color: #27ae60; /* Green button */
+    color: #fff;
+    border: none;
+  }
+
+  .btn-success:hover {
+    background-color: #2ecc71; /* Lighter green on hover */
+  }
+
+  .btn-secondary {
+    background-color: #95a5a6; /* Grey for disabled button */
+    color: #fff;
+    border: none;
+  }
+
+  .btn-secondary:disabled {
+    background-color: #bdc3c7; /* Lighter grey for disabled button */
+  }
+
+  .btn:hover {
+    opacity: 0.9; /* Slightly transparent on hover */
+  }
+
+  /* Styling for ordered items list */
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  li {
+    font-size: 0.9rem;
+    color: #2c3e50;
+  }
+</style>
 
 <div class="container mt-4">
-    <h2>Delivered Orders</h2>
-    <table class="table table-bordered table-striped mt-4">
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Customer</th>
-                <th>Restaurant</th>
-                <th>Items</th>
-                <th>Total Cost</th>
-                <th>Delivery Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in orders %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ order.customer.name }}</td>
-                <td>{{ order.restaurant.name }}</td>
-                <td>
-                    <ul>
-                        {% for i in order.ordered_items %}
-                        <li>{{ i.item_name }} - {{ i.quantity }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>${{ order.total_cost }}</td>
-                <td>{{ order.delivery_datetime }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="6" class="text-center">No delivered orders</td>
-            </tr>
+  <h2>Delivered Orders</h2>
+  <table class="table table-bordered table-striped mt-4">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Restaurant</th>
+        <th>Items</th>
+        <th>Total Cost</th>
+        <th>Delivery Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ order.customer.name }}</td>
+        <td>{{ order.restaurant.name }}</td>
+        <td>
+          <ul>
+            {% for i in order.ordered_items %}
+            <li>{{ i.item_name }} - {{ i.quantity }}</li>
             {% endfor %}
-        </tbody>
-    </table>
+          </ul>
+        </td>
+        <td>${{ order.total_cost }}</td>
+        <td>{{ order.delivery_datetime }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" class="text-center">No delivered orders</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
+
 {% endblock %}

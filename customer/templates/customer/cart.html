@@ -1,62 +1,105 @@
-{% extends "accounts/base.html" %}
-{% block title %}Your Cart{% endblock %}
+{% extends "accounts/base.html" %} {% block title %}Your Cart{% endblock %} 
+
+
 {% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+    background-size: cover;
+    min-height: 100vh;
+  }
+
+  .table {
+    background: #ffffff;
+  }
+
+  .btn {
+    margin: 2px;
+  }
+</style>
 <div class="container mt-4">
   <h2>Welcome to the Cart Page!</h2>
   <p>Your selected food items will be displayed here.</p>
 
   <!-- Display success message -->
   {% if messages %}
-    <div class="alert alert-success">
-      {% for message in messages %}
-        <p>{{ message }}</p>
-      {% endfor %}
-    </div>
+  <div class="alert alert-success">
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+  </div>
   {% endif %}
 
   <!-- Table to display the cart items -->
   <form method="post" action="{% url 'customer:cart' %}">
     {% csrf_token %}
     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Item Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-                <th scope="col">Action</th> <!-- Add an action column for delete -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for cart_item in cart_items %}
-            <tr>
-                <td>{{ cart_item.menu_item.name }}</td>
-                <td>₹{{ cart_item.menu_item.price }}</td>
-                <td>
-                    <!-- Quantity input field -->
-                    <div class="input-group">
-                        <button class="btn btn-secondary" type="submit" name="decrease" value="{{ cart_item.id }}">-</button>
-                        <input type="number" class="form-control" name="quantity_{{ cart_item.id }}" value="{{ cart_item.quantity }}" min="1" step="1">
-                        <button class="btn btn-secondary" type="submit" name="increase" value="{{ cart_item.id }}">+</button>
-                    </div>
-                </td>
-                <td>₹{{ cart_item.total_price }}</td>  <!-- Ensure total_price is displayed here -->
-                <td>
-                    <!-- Delete button -->
-                    <button type="submit" class="btn btn-danger" name="delete_item" value="{{ cart_item.id }}">Delete</button>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">No items in your cart</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">Item Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cart_item in cart_items %}
+        <tr>
+          <td>{{ cart_item.menu_item.name }}</td>
+          <td>₹{{ cart_item.menu_item.price }}</td>
+          <td>
+            <div class="input-group">
+              <button
+                class="btn btn-secondary"
+                type="submit"
+                name="decrease"
+                value="{{ cart_item.id }}"
+              >
+                -
+              </button>
+              <input
+                type="number"
+                class="form-control"
+                name="quantity_{{ cart_item.id }}"
+                value="{{ cart_item.quantity }}"
+                min="1"
+                step="1"
+              />
+              <button
+                class="btn btn-secondary"
+                type="submit"
+                name="increase"
+                value="{{ cart_item.id }}"
+              >
+                +
+              </button>
+            </div>
+          </td>
+          <td>₹{{ cart_item.total_price }}</td>
+          <td>
+            <button
+              type="submit"
+              class="btn btn-danger"
+              name="delete_item"
+              value="{{ cart_item.id }}"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5">No items in your cart</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
     <div class="text-center mt-4">
-      <!-- Place Order Button -->
-      <button type="submit" class="btn btn-success" name="place_order">Place Order</button>
-  </div>
-</form>
+      <button type="submit" class="btn btn-success" name="place_order">
+        Place Order
+      </button>
+    </div>
+  </form>
 </div>
 {% endblock %}
