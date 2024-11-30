@@ -21,15 +21,22 @@ def login_view(request):
     if request.method == "POST":
         email = request.POST.get('emailId')
         password = request.POST.get('password')
-        
+        reenter_password = request.POST.get('reenterPassword')
+
+        # Validate that passwords match
+        if password != reenter_password:
+            return render(request, 'delivery/login.html', {'error': 'Passwords do not match'})
+
         try:
-            delivery_user = Delivery.objects.get(emailId=email, password=password) 
+            # Verify the email and password in the Delivery model
+            delivery_user = Delivery.objects.get(emailId=email, password=password)
             request.session['user_id'] = delivery_user.id  
-            return redirect('delivery:delivery_home') 
+            return redirect('delivery:delivery_home')  # Redirect to the delivery home page
         except Delivery.DoesNotExist:
             return render(request, 'delivery/login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'delivery/login.html')
+
 
 def delivery_home(request):
     user_id = request.session.get('user_id')

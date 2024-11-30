@@ -33,7 +33,7 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         text-align: center;
         transform: scale(0.95);
-        animation: scaleUp 0.4s ease-out forwards;
+        animation: scaleUp 0.4s ease-out forwards, shake 1.5s infinite;
         transition: transform 0.3s ease;
       }
 
@@ -98,6 +98,23 @@
         transform: translateY(2px);
       }
 
+      /* Shake Animation */
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+      }
+
       /* Animation Effects */
       @keyframes scaleUp {
         from {
@@ -127,7 +144,9 @@
 
   <body>
     <div class="welcome-heading">
-      Welcome to the Online Food Ordering System!
+      Welcome to FoodFusion,
+      <span>Online Food Ordering System</span>
+      !
     </div>
     <div class="container">
       <h1>Choose Your Role</h1>

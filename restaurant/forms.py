@@ -1,5 +1,6 @@
 from django import forms
 from .models import Restaurant, MenuItem
+from django.core.exceptions import ValidationError
 
 class RestaurantSignupForm(forms.ModelForm):
     class Meta:
@@ -8,6 +9,11 @@ class RestaurantSignupForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        if len(password) <= 3:
+            raise ValidationError('Password must be more than 5 characters.')
+        return password
 class MenuItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem

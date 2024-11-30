@@ -21,15 +21,22 @@ def login_view(request):
     if request.method == "POST":
         email = request.POST.get('emailId')
         password = request.POST.get('password')
-        
+        reenter_password = request.POST.get('reenterPassword')
+
+        # Validate that passwords match
+        if password != reenter_password:
+            return render(request, 'restaurant/login.html', {'error': 'Passwords do not match'})
+
         try:
-            restaurant_user = Restaurant.objects.get(emailId=email, password=password)  # Use hashed password validation if possible
+            # Verify the email and password in the Restaurant model
+            restaurant_user = Restaurant.objects.get(emailId=email, password=password)
             request.session['user_id'] = str(restaurant_user.id)  # Convert UUID to string for session storage
             return redirect('restaurant:restaurant_home', restaurant_id=restaurant_user.id)
         except Restaurant.DoesNotExist:
             return render(request, 'restaurant/login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'restaurant/login.html')
+
 
 def profile(request, restaurant_id):
     restaurant = get_object_or_404(Restaurant, id=restaurant_id)

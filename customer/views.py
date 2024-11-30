@@ -19,6 +19,10 @@ def login_view(request):
     if request.method == "POST":
         email = request.POST.get('emailId')
         password = request.POST.get('password')
+        reenter_password = request.POST.get('reenterPassword')
+        
+        if password != reenter_password:
+            return render(request, 'customer/login.html', {'error': 'Passwords do not match'})
         
         try:
             customer = Customer.objects.get(emailId=email, password=password)
@@ -28,6 +32,7 @@ def login_view(request):
             return render(request, 'customer/login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'customer/login.html')
+
 
 def customer_home(request):
     user_id = request.session.get('user_id')

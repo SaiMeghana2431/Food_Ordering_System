@@ -22,8 +22,6 @@
         padding: 30px;
         width: 320px;
         text-align: center;
-        transform: scale(0.95);
-        animation: scaleUp 0.5s ease-out forwards;
       }
       h1 {
         color: #333;
@@ -31,9 +29,10 @@
         font-size: 2rem;
       }
       label {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin: 10px 0 5px;
-        text-align: left;
         color: #333;
       }
       input[type="email"],
@@ -71,6 +70,9 @@
       p {
         margin: 10px 0;
       }
+      .p1 {
+        color: #333;
+      }
       a {
         color: #5cb85c;
         text-decoration: none;
@@ -78,15 +80,15 @@
       a:hover {
         text-decoration: underline;
       }
-      @keyframes scaleUp {
-        from {
-          transform: scale(0.8);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
+      .status-icon {
+        font-size: 1.2rem;
+        margin-left: 5px;
+      }
+      .tick {
+        color: green;
+      }
+      .wrong {
+        color: red;
       }
     </style>
   </head>
@@ -101,12 +103,39 @@
         <label for="emailId">Email:</label>
         <input type="email" name="emailId" required />
         <label for="password">Password:</label>
-        <input type="password" name="password" required />
+        <input type="password" id="password" name="password" required />
+        <label for="reenterPassword">
+          Re-enter Password:
+          <span id="statusIcon" class="status-icon"></span>
+        </label>
+        <input
+          type="password"
+          id="reenterPassword"
+          name="reenterPassword"
+          required
+        />
         <button type="submit">Login</button>
       </form>
-      <p>
+      <p class="p1">
         Don't have an account? <a href="{% url 'customer:signup' %}">Sign Up</a>
       </p>
     </div>
+    <script>
+      const password = document.getElementById("password");
+      const reenterPassword = document.getElementById("reenterPassword");
+      const statusIcon = document.getElementById("statusIcon");
+
+      reenterPassword.addEventListener("input", () => {
+        if (reenterPassword.value === password.value) {
+          statusIcon.textContent = "✔";
+          statusIcon.classList.add("tick");
+          statusIcon.classList.remove("wrong");
+        } else {
+          statusIcon.textContent = "✘";
+          statusIcon.classList.add("wrong");
+          statusIcon.classList.remove("tick");
+        }
+      });
+    </script>
   </body>
 </html>
